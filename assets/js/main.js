@@ -20,7 +20,6 @@ formLogin.addEventListener('submit', (event) => {
     };
     let send = submit(data, '/admin/loginIn');
     send.then((data) => {
-        console.log(data)
         if (data) {
             if (
                 formLogin.login.classList.contains('is-invalid') ||
