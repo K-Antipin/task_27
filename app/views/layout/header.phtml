@@ -1,0 +1,37 @@
+<header class="header">
+    <nav class="navbar" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="/assets/img/gallery.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Галлерея
+            </a>
+            <ul class="nav justify-content-center" id="navBarNavigator">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Главная</a>
+                </li>
+                <?php if (!isset($_SESSION['auth'])) : ?>
+                    <li class="nav-item">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Войти
+                        </button>
+                    </li>
+                <?php endif ?>
+                <?php if (isset($_SESSION['auth']) && $_SESSION['auth']) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Здравствуйте, <?= htmlspecialchars($_SESSION['name']) ?>!</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadsModal">Добавить картинку</button>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a href="/admin" class="btn btn-primary" >Кликни</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <button type="button" class="btn btn-primary" id="logOut">Выйти</button>
+                    </li>
+                <?php endif ?>
+            </ul>
+        </div>
+    </nav>
+</header>

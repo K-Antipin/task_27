@@ -1,0 +1,2 @@
+[2023-04-25T14:53:12.158088+00:00] mylogger.INFO: Auth error {"mess":"Не верный пароль","login":"test@test.test","password":"123123123"} []
+[2023-04-25T14:53:19.715088+00:00] mylogger.INFO: Auth error {"mess":"Пользователь не найден","login":"test6@test.test","password":"123123123"} []

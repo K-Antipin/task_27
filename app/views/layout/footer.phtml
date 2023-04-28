@@ -1,0 +1,134 @@
+<?php
+$token = hash('gost-crypto', random_int(0,999999));
+$_SESSION["CSRF"] = $token;
+?>
+<!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Авторизация:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formLogin" name="formLogin">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Введите логин</label>
+                            <input class="form-control" type="text" placeholder="Логин" aria-label="default input example" name="login">
+                            <input type="hidden" name="token" value="<?=$token?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Введите пароль</label>
+                            <input type="password" class="form-control" placeholder="Пароль" id="exampleInputPassword1" name="password">
+                            <div id="passwordHelpBlock" class="form-text">
+                                Ваш пароль должен содержать не менее 3 символов.
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" form="formLogin">Войти</button>
+                    <a href="/admin/registerVk" class="btn btn-primary">Авторизоваться через VK</a>
+                    <button type="submit" class="btn btn-secondary" id="buttonRegister" data-bs-toggle="modal" data-bs-target="#registerModal">Регистрация</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Login -->
+
+    <!-- Modal Register -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Регистрация:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formRegister" name="formRegister">
+                        <div class="mb-3">
+                            <label class="form-label">Ваше Имя</label>
+                            <input class="form-control" type="text" placeholder="Имя" aria-label="default input example" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ваша почта</label>
+                            <input class="form-control" type="email" placeholder="name@example.com" aria-label="default input example" name="email" required>
+                            <input type="hidden" name="token" value="<?=$token?>">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Введите пароль</label>
+                            <input type="password" class="form-control" placeholder="Пароль" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Повторите пароль</label>
+                            <input type="password" class="form-control" placeholder="Повторите пароль" name="passwordConfirm" required>
+                            <div id="passwordHelpBlock" class="form-text">
+                                Ваш пароль должен содержать не менее 3 символов.
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" form="formRegister">Регистрация</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Register -->
+
+    <!-- Modal Uploads -->
+    <div class="modal fade" id="uploadsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Загрузка файлов:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formUploads" name="formUploads" method='post' action="/files" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Допускается загрузка более одного изображения</label>
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
+                            <input class="form-control" type="file" name="files[]" id="formFileMultiple" multiple>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" form="formUploads">Загрузить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Uploads -->
+
+    <!-- Modal View -->
+    <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" id="pictureHeader">
+                    <h1 class="modal-title fs-5" id="pictureAuthor"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div style="display: flex;justify-content: center;">
+                    <img alt="Картинка" id="imgModalView">
+                </div>
+                <hr>
+                <div class="modal-body" id="modalBodyMess">
+
+                </div>
+                <?php if (isset($_SESSION['auth']) && $_SESSION['auth']) : ?>
+                    <div class="modal-footer">
+                        <form id="formComments" name="formComments" style="width: 100%">
+                            <div>
+                                <textarea class="form-control" id="exampleFormControlTextarea" rows="1" placeholder="Введите текст" name="textarea"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" form="formComments">Добавить комментарий</button>
+                        </form>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal View -->

@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.not_found {
+    font-family: 'Marko One', serif;
+    margin-top: 200px;
+}
+
+.container .imgBody {
+    padding: 5px;
+    transition: 1s;
+}
+
+.container .imgBody:hover {
+    transform: scale(1.5);
+}
+
+#imgModalView {
+    max-width: 80%;
+    height: auto;
+    display: block;
+}
+
+
+#formComments {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+#formComments div {
+    width: 80%;
+    margin-right: 20px;
+}
+
+#modalBodyMess ul li * {
+    margin-right: 5px;
+}
+
+.bascetMess {
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+}
+
+.bascetView {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+
+.dateTime {
+    font-size: small;
+}

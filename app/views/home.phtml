@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="grid text-center" id="imgView">
+        <?php
+        for ($i = 0; $i < count($payload); $i++) {
+            echo '<a href="/"  id="' . $payload[$i]['file_name'] . '">';
+            echo '<img class="imgBody" src="/assets/img/files/' . $payload[$i]['file_name'] . '" width="auto" height="150" alt="Картинка" data-img-id="' . $payload[$i]['id'] . '" data-user-id="' . $payload[$i]['user_id'] . '" data-user-name="' . $payload[$i]['name'] . '">';
+            echo '</a>';
+        }
+        unset($payload);
+        ?>
+    </div>
+    
+</div>

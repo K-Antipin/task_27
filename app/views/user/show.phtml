@@ -1,0 +1,35 @@
+<?php
+
+
+$skip = ['bean'];
+
+?>
+<h1>Show</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Date</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <?php
+
+foreach($payload as $key => $value) {
+
+    if (in_array($key, $skip)) {
+        continue;
+    }?>
+      <td scope="row"><?= $value; ?></td>
+      <?php
+}
+?>
+
+    </tr>
+  </tbody>
+</table>
